@@ -12,9 +12,10 @@ body {
 	margin-right: auto;
 	background-color: white;
 	border-radius: 2px;
-}	
+	background-color: none;
+}
 
-#slideShow {	
+#slideShow {
 	position: relative;
 }
 
@@ -30,12 +31,16 @@ body {
 	position: absolute;
 	z-index: 3;
 	opacity: .8;
-	top: 0px;
+	top: 74%;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .thumbnail {
 	position: relative;
 	box-shadow: 1px 3px 20px 0px;
+	height: 400px;
+	width: 100%;
 }
 
 
@@ -47,16 +52,21 @@ body {
 #nav {
 	clear: both;
 	position: relative;
+	
 }
 
 #prevPhoto {
 	height: 42px;
 	width: 42px;
+	position: relative;
+
 }
 
 #nextPhoto {
 	height: 42px;
 	width: 42px;
+	position: relative;
+
 }
 
 .details p {
