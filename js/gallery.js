@@ -33,11 +33,14 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
+  $('.location').after('');
   if(mCurrentIndex == mImages.length){
     mCurrentIndex = 0;
   }
 	 $('#photo').attr('src', mImages[mCurrentIndex].src);
-   $('.location').html(mImages[mCurrentIndex].location)
+   $('.location').text('Location: ' + mImages[mCurrentIndex].location);
+   $('.description').text('Description: ' + mImages[mCurrentIndex].description);
+   $('.date').text('Date: ' + mImages[mCurrentIndex].date);
    mCurrentIndex++;
 }
 
@@ -74,7 +77,7 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
-	$('.details').eq(0).hide();
+	//$('.details').eq(0).hide();
 
 });
 
