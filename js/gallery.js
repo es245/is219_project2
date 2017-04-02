@@ -16,7 +16,7 @@
 animate();
 
 var mLastFrameTime = 0;
-var mWaitTime = 2000; //time in ms
+var mWaitTime = 5000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
@@ -42,11 +42,17 @@ function swapPhoto() {
   $('.description').text('Description: ' + mImages[mCurrentIndex].description);
   $('.date').text('Date: ' + mImages[mCurrentIndex].date);
   mCurrentIndex++;
-
+  console.log(mImages.length);
 
 }
 
-
+function changeSrc(currentIndex){
+  $('#photo').attr('src', mImages[currentIndex].src);
+  $('.location').text('Location: ' + mImages[currentIndex].location);
+  $('.description').text('Description: ' + mImages[currentIndex].description);
+  $('.date').text('Date: ' + mImages[currentIndex].date);
+  console.log(currentIndex);
+}
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -88,37 +94,18 @@ $(document).ready( function() {
   });
 
   $('#nextPhoto').click(function(){
-    hasBeenClicked = true;
-    if(mCurrentIndex < mImages.length){
-      mCurrentIndex+=1;
-    }
-    else{
-      mCurrentIndex = 0;
-    }
-    $('#photo').attr('src', mImages[mCurrentIndex].src);
-    $('.location').text('Location: ' + mImages[mCurrentIndex].location);
-    $('.description').text('Description: ' + mImages[mCurrentIndex].description);
-    $('.date').text('Date: ' + mImages[mCurrentIndex].date);
-
-
+    swapPhoto();
   });
 
   $('#prevPhoto').click(function(){
-    hasBeenClicked = true;
     if(mCurrentIndex == 0){
       mCurrentIndex = mImages.length;
     }
     else{
-      mCurrentIndex-=1;
+      mCurrentIndex--;
     }
-    $('#photo').attr('src', mImages[mCurrentIndex].src);
-    $('.location').text('Location: ' + mImages[mCurrentIndex].location);
-    $('.description').text('Description: ' + mImages[mCurrentIndex].description);
-    $('.date').text('Date: ' + mImages[mCurrentIndex].date);
-
-
+    changeSrc(mCurrentIndex);
   });
-
 });
 
 window.addEventListener('load', function() {
