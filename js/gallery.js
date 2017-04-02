@@ -16,7 +16,7 @@
 animate();
 
 var mLastFrameTime = 0;
-var mWaitTime = 1000; //time in ms
+var mWaitTime = 2000; //time in ms
 function animate() {
     requestAnimFrame( animate );
 	var currentTime = new Date().getTime();
@@ -33,16 +33,20 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-  $('.location').after('');
   if(mCurrentIndex == mImages.length){
     mCurrentIndex = 0;
   }
-	 $('#photo').attr('src', mImages[mCurrentIndex].src);
-   $('.location').text('Location: ' + mImages[mCurrentIndex].location);
-   $('.description').text('Description: ' + mImages[mCurrentIndex].description);
-   $('.date').text('Date: ' + mImages[mCurrentIndex].date);
-   mCurrentIndex++;
+
+  $('#photo').attr('src', mImages[mCurrentIndex].src);
+  $('.location').text('Location: ' + mImages[mCurrentIndex].location);
+  $('.description').text('Description: ' + mImages[mCurrentIndex].description);
+  $('.date').text('Date: ' + mImages[mCurrentIndex].date);
+  mCurrentIndex++;
+
+
 }
+
+
 
 // Counter for the mImages array
 var mCurrentIndex = 0;
@@ -77,7 +81,43 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
-	//$('.details').eq(0).hide();
+	$('.details').eq(0).hide();
+  $('.moreIndicator').click(function(){
+    $('.moreIndicator').toggleClass('rot90 rot270');
+    $('.details').fadeToggle(500);
+  });
+
+  $('#nextPhoto').click(function(){
+    hasBeenClicked = true;
+    if(mCurrentIndex < mImages.length){
+      mCurrentIndex+=1;
+    }
+    else{
+      mCurrentIndex = 0;
+    }
+    $('#photo').attr('src', mImages[mCurrentIndex].src);
+    $('.location').text('Location: ' + mImages[mCurrentIndex].location);
+    $('.description').text('Description: ' + mImages[mCurrentIndex].description);
+    $('.date').text('Date: ' + mImages[mCurrentIndex].date);
+
+
+  });
+
+  $('#prevPhoto').click(function(){
+    hasBeenClicked = true;
+    if(mCurrentIndex == 0){
+      mCurrentIndex = mImages.length;
+    }
+    else{
+      mCurrentIndex-=1;
+    }
+    $('#photo').attr('src', mImages[mCurrentIndex].src);
+    $('.location').text('Location: ' + mImages[mCurrentIndex].location);
+    $('.description').text('Description: ' + mImages[mCurrentIndex].description);
+    $('.date').text('Date: ' + mImages[mCurrentIndex].date);
+
+
+  });
 
 });
 
