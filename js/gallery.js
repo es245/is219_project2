@@ -27,6 +27,7 @@ function animate() {
 	if ((currentTime - mLastFrameTime) > mWaitTime) {
 		swapPhoto();
 		mLastFrameTime = currentTime;
+    console.log(currentTime);
 	}
 }
 
@@ -42,7 +43,6 @@ function swapPhoto() {
   $('.description').text('Description: ' + mImages[mCurrentIndex].description);
   $('.date').text('Date: ' + mImages[mCurrentIndex].date);
   mCurrentIndex++;
-  console.log(mImages.length);
 
 }
 
@@ -51,7 +51,7 @@ function changeSrc(currentIndex){
   $('.location').text('Location: ' + mImages[currentIndex].location);
   $('.description').text('Description: ' + mImages[currentIndex].description);
   $('.date').text('Date: ' + mImages[currentIndex].date);
-  console.log(currentIndex);
+
 }
 
 // Counter for the mImages array
@@ -88,24 +88,34 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+  console.log(mImages);
+  //---------------------
   $('.moreIndicator').click(function(){
     $('.moreIndicator').toggleClass('rot90 rot270');
     $('.details').fadeToggle(500);
   });
 
   $('#nextPhoto').click(function(){
+    if(mCurrentIndex == mImages.length){
+      mCurrentIndex = 0;
+    }
     swapPhoto();
+    mLastFrameTime = 0;
   });
 
   $('#prevPhoto').click(function(){
     if(mCurrentIndex == 0){
-      mCurrentIndex = mImages.length;
+      mCurrentIndex = mImages.length-=1;
     }
     else{
-      mCurrentIndex--;
+      mCurrentIndex-=2;
     }
-    changeSrc(mCurrentIndex);
+    swapPhoto();
+    mLastFrameTime = 0;
+    console.log(mCurrentIndex);
   });
+
+
 });
 
 window.addEventListener('load', function() {
