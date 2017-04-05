@@ -1,0 +1,34 @@
+{
+    "images": [
+        {
+            "imgPath": "img/extra/desert_night.jpg",
+            "imgLocation": "Utah, USA",
+            "description": "A breathetaking view of the night sky.",
+            "date": "01/01/2016"
+        },
+        {
+            "imgPath": "img/extra/desert_day.jpg",
+            "imgLocation": "Colorado",
+            "description": "Grassy mountain tops in the Colorado Mountain Range.",
+            "date": "01/02/2016"
+        },
+        {
+            "imgPath": "img/extra/lakeside.jpg",
+            "imgLocation": "Vermont",
+            "description": "Road trip to the cabin.",
+            "date": "01/03/2016"
+        },
+        {
+            "imgPath": "img/extra/forest.jpg",
+            "imgLocation": "New Hampshire",
+            "description": "Stopped for the fog, shot for the view.",
+            "date": "01/04/2016"
+        },
+        {
+            "imgPath": "img/extra/river.jpg",
+            "imgLocation": "New Hampshire",
+            "description": "Beautiful day on the river.",
+            "date": "01/05/2016"
+        }
+  ]
+}

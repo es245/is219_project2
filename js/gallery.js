@@ -27,7 +27,6 @@ function animate() {
 	if ((currentTime - mLastFrameTime) > mWaitTime) {
 		swapPhoto();
 		mLastFrameTime = currentTime;
-    console.log(currentTime);
 	}
 }
 
@@ -46,13 +45,19 @@ function swapPhoto() {
 
 }
 
-function changeSrc(currentIndex){
-  $('#photo').attr('src', mImages[currentIndex].src);
-  $('.location').text('Location: ' + mImages[currentIndex].location);
-  $('.description').text('Description: ' + mImages[currentIndex].description);
-  $('.date').text('Date: ' + mImages[currentIndex].date);
-
+function getQueryParams(qs) {
+  qs = qs.split("+").join(" ");
+  var params = {},
+      tokens,
+      re = /[?&]?([^=]+)=([^&]*)/g;
+      while (tokens = re.exec(qs)) {
+        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+      }
+      return params;
 }
+
+var $_GET = getQueryParams(document.location.search);
+console.log($_GET["mUrl"]); // would output "John"
 
 // Counter for the mImages array
 var mCurrentIndex = -1;
@@ -68,7 +73,7 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = 'images.json';
+var mUrl = $_GET['mUrl'];
 
 
 //$.getJSON('images.json', function(data){
@@ -88,7 +93,6 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-  console.log(mImages);
   //---------------------
   $('.moreIndicator').click(function(){
     $('.moreIndicator').toggleClass('rot90 rot270');
@@ -112,7 +116,6 @@ $(document).ready( function() {
     }
     swapPhoto();
     mLastFrameTime = 0;
-    console.log(mCurrentIndex);
   });
 
 
@@ -141,9 +144,24 @@ function reqListener () {
   console.log(this.responseText);
 }
 
+mRequest.onreadystatechange = function() {
+// Do something interesting if file is opened successfully
+  if (mRequest.readyState == 4 && mRequest.status == 200) {
+      try {
+      // Let’s try and see if we can parse JSON
+      mJson = JSON.parse(mRequest.responseText);
+      // Let’s print out the JSON; It will likely show as “obj”
+      console.log(mJson);
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+};
+mRequest.open("GET", mUrl, true);
+mRequest.send();
 
 $.ajax({
-  url: 'images.json',
+  url: mUrl,
   dataType: 'json',
   type: 'get',
   cache: 'false',
