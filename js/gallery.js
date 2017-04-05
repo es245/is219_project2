@@ -34,15 +34,15 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-  if(mCurrentIndex == mImages.length){
-    mCurrentIndex = 0;
+  if(mCurrentIndex == mImages.length-1){
+    mCurrentIndex = -1;
   }
-
+  mCurrentIndex++;
   $('#photo').attr('src', mImages[mCurrentIndex].src);
   $('.location').text('Location: ' + mImages[mCurrentIndex].location);
   $('.description').text('Description: ' + mImages[mCurrentIndex].description);
   $('.date').text('Date: ' + mImages[mCurrentIndex].date);
-  mCurrentIndex++;
+
 
 }
 
@@ -55,7 +55,7 @@ function changeSrc(currentIndex){
 }
 
 // Counter for the mImages array
-var mCurrentIndex = 0;
+var mCurrentIndex = -1;
 
 // XMLHttpRequest variable
 var mRequest = new XMLHttpRequest();
@@ -96,8 +96,8 @@ $(document).ready( function() {
   });
 
   $('#nextPhoto').click(function(){
-    if(mCurrentIndex == mImages.length){
-      mCurrentIndex = 0;
+    if(mCurrentIndex == mImages.length-1){
+      mCurrentIndex = -1;
     }
     swapPhoto();
     mLastFrameTime = 0;
@@ -105,7 +105,7 @@ $(document).ready( function() {
 
   $('#prevPhoto').click(function(){
     if(mCurrentIndex == 0){
-      mCurrentIndex = mImages.length-=1;
+      mCurrentIndex = mImages.length-2;
     }
     else{
       mCurrentIndex-=2;
