@@ -32,6 +32,11 @@ function animate() {
 
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
+
+/*swapPhoto() will change the source of the current photo in the
+slideshow. It will also change the details according to which photo
+is currently being displayed.*/
+
 function swapPhoto() {
   if(mCurrentIndex == mImages.length-1){
     mCurrentIndex = -1;
@@ -45,6 +50,7 @@ function swapPhoto() {
 
 }
 
+//Return the GET variable accordind to the parameter of the function.
 function getQueryParams(qs) {
   qs = qs.split("+").join(" ");
   var params = {},
@@ -57,7 +63,12 @@ function getQueryParams(qs) {
 }
 
 var $_GET = getQueryParams(document.location.search);
-console.log($_GET["mUrl"]); // would output "John"
+
+//Check to see if the GET variable is set.
+//If not, make the default URL "images.json".
+if($_GET['mUrl'] == "undefined" || $_GET['mUrl'] == null){
+  $_GET['mUrl'] = "images.json";
+}
 
 // Counter for the mImages array
 var mCurrentIndex = -1;
@@ -71,10 +82,8 @@ var mImages = [];
 // Holds the retrived JSON information
 var mJson;
 
-// URL for the JSON to load by default
-// Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
+// Retrieves the
 var mUrl = $_GET['mUrl'];
-
 
 //$.getJSON('images.json', function(data){
 //  console.log(data);
@@ -93,12 +102,14 @@ $(document).ready( function() {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
-  //---------------------
+
+  //Rotates the arrow within the slideshow.
   $('.moreIndicator').click(function(){
     $('.moreIndicator').toggleClass('rot90 rot270');
     $('.details').fadeToggle(500);
   });
 
+  //Increments the slideshow by 1 photo.
   $('#nextPhoto').click(function(){
     if(mCurrentIndex == mImages.length-1){
       mCurrentIndex = -1;
@@ -107,6 +118,7 @@ $(document).ready( function() {
     mLastFrameTime = 0;
   });
 
+  //Decrements the slideshow by 1 photo.
   $('#prevPhoto').click(function(){
     if(mCurrentIndex == 0){
       mCurrentIndex = mImages.length-2;
@@ -127,17 +139,12 @@ window.addEventListener('load', function() {
 
 }, false);
 
+//Assigns the value of the current Json object into an object.
 function GalleryImage(location, description, date, src) {
-
   this.location = location;
   this.description = description;
   this.date = date;
   this.src = src;
-	//implement me as an object to hold the following data about an image:
-	//1. location where photo was taken
-	//2. description of photo
-	//3. the date when the photo was taken
-	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 }
 
 function reqListener () {
@@ -151,7 +158,7 @@ mRequest.onreadystatechange = function() {
       // Let’s try and see if we can parse JSON
       mJson = JSON.parse(mRequest.responseText);
       // Let’s print out the JSON; It will likely show as “obj”
-      console.log(mJson);
+      //console.log(mJson);
     } catch(err) {
       console.log(err.message)
     }
@@ -159,6 +166,10 @@ mRequest.onreadystatechange = function() {
 };
 mRequest.open("GET", mUrl, true);
 mRequest.send();
+
+/* A short-hand AJAX request instead of the default one. This function
+will query the mUrl variable, parse its objects, and assign each one's
+values to a GalleryImage object in the mImages array. */
 
 $.ajax({
   url: mUrl,

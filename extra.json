@@ -8,25 +8,25 @@
         },
         {
             "imgPath": "img/extra/desert_day.jpg",
-            "imgLocation": "Colorado",
+            "imgLocation": "Colorado, USA",
             "description": "Grassy mountain tops in the Colorado Mountain Range.",
             "date": "01/02/2016"
         },
         {
             "imgPath": "img/extra/lakeside.jpg",
-            "imgLocation": "Vermont",
+            "imgLocation": "Vermont, USA",
             "description": "Road trip to the cabin.",
             "date": "01/03/2016"
         },
         {
             "imgPath": "img/extra/forest.jpg",
-            "imgLocation": "New Hampshire",
+            "imgLocation": "New Hampshire, USA",
             "description": "Stopped for the fog, shot for the view.",
             "date": "01/04/2016"
         },
         {
             "imgPath": "img/extra/river.jpg",
-            "imgLocation": "New Hampshire",
+            "imgLocation": "New Hampshire, USA",
             "description": "Beautiful day on the river.",
             "date": "01/05/2016"
         }
